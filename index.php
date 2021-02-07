@@ -38,6 +38,7 @@
 <head>
 	<title>Student Form</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="validate.js"></script>
 </head>
 <body>
 
@@ -88,7 +89,7 @@
 		<?php } ?>
 	</table>
 
-	<form method="post" action="server.php" >
+	<form name="student-form" method="post" action="server.php" >
 		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		<div class="input-group">
 			<label>Name</label>
@@ -108,7 +109,7 @@
 		</div>
 		<div class="input-group">
 			<label>Date of Birth</label>
-			<input type="date" name="dob" value="<?php echo $date; ?>">
+			<input type="date" name="dob" value="<?php echo $dob; ?>">
 		</div>
 		<div class="input-group">
 			<label>Address</label>
@@ -125,9 +126,9 @@
 		<div class="input-group">
 			<!-- <button class="btn" type="submit" name="save" >Save</button> -->
 			<?php if ($update == true): ?>
-				<button class="btn" type="submit" name="update" style="background: #556B2F;" >Update</button>
+				<button class="btn" onclick="return validateForm()" type="submit" name="update" style="background: #556B2F;" >Update</button>
 			<?php else: ?>
-				<button class="btn" type="submit" name="save" >Save</button>
+				<button class="btn" onclick="return validateForm()" type="submit" name="save" >Save</button>
 			<?php endif ?>
 		</div>
 	</form>
