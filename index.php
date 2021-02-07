@@ -36,7 +36,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CRUD: CReate, Update, Delete PHP MySQL</title>
+	<title>Student Form</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
