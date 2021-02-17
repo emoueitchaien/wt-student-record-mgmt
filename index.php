@@ -1,136 +1,45 @@
-<?php  include('server.php'); ?>
 
-<?php 
-	if (isset($_GET['edit'])) {
-		$id = $_GET['edit'];
 
-		// echo $id . gettype($id);
-
-		$update = true;
-
-		$record = mysqli_query($db, "SELECT * FROM students WHERE id=$id");
-
-		// echo gettype($record);
-
-		// if (!$record){
-		// 	printf("Error: %s\n", mysqli_error($db));
-		// 	exit();
-		// }
-
-		// printf(count(mysqli_fetch_array($record)));
-
-		// if (count(mysqli_fetch_array($record)) == 1 ) {
-			$n = mysqli_fetch_array($record);
-			$name = $n['name'];
-			$roll_no = $n['roll_no'];
-			$faculty = $n['faculty'];
-			$batch = $n['batch'];
-			$dob = $n['dob'];
-			$address = $n['address'];
-			$email = $n['email'];
-			$phone = $n['phone'];
-		// }
-	}
-?>
-
-<!DOCTYPE html>
 <html>
-<head>
-	<title>Student Form</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="validate.js"></script>
-</head>
-<body>
 
-	<?php if (isset($_SESSION['message'])): ?>
-		<div class="msg">
-			<?php 
-				echo $_SESSION['message']; 
-				unset($_SESSION['message']);
-			?>
-		</div>
-	<?php endif ?>
+	<head>
+		<title>Login</title>
+		<script src="login_validate.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+				integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	</head>
 
+	<body>
+		<?php 
+			include("server.php");
+		?>
+		<div style="margin : 100px auto; width: 50%;">
 
-	<?php $results = mysqli_query($db, "SELECT * FROM students"); ?>
-
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Roll No.</th>
-				<th>Faculty</th>
-				<th>Batch</th>
-				<th>D.O.B.</th>
-				<th>Address</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th colspan="2">Action</th>
-			</tr>
-		</thead>
+			<h1 style="text-align: center;">Welcome to Student Registration Form</h1>
+			<h4 style="text-align: center; margin-top: 20px;">This is the Home page where you can signup/login.</h4>
+			
+			<div style=" width: 50%; margin: 50px auto;">    
+				<form name="form1" class="row g-3 needs-validation" novalidate method="post">
+					<div class="col-md-10">
+						<label for="userName" class="form-label" >Username</label>
+						<input type="text" class="form-control" id="validationCustom01" name="username" required>
+					</div>
+					<div class="mb-2">
+						<label for="inputPass" class="col-sm-2 col-form-label">Password</label>
+						<div class="col-md-10">
+							<input type="password" name="password1" class="form-control" id="inputpass">
+						</div>
+					</div>
+					<div class="col-12">
+						<button onclick="return validateForm()" style="margin-right: 20px" class="btn btn-primary"
+								type="submit" name="submit" value="Submit">Login</button>
+					</div>
+					<a href="signup.php">Don't have an account?</a>
+				</form>
+			</div>
 		
-		<?php while ($row = mysqli_fetch_array($results)) { ?>
-			<tr>
-				<td><?php echo $row['name']; ?></td>
-				<td><?php echo $row['roll_no']; ?></td>
-				<td><?php echo $row['faculty']; ?></td>
-				<td><?php echo $row['batch']; ?></td>
-				<td><?php echo $row['dob']; ?></td>
-				<td><?php echo $row['address']; ?></td>
-				<td><?php echo $row['email']; ?></td>
-				<td><?php echo $row['phone']; ?></td>
-				<td>
-					<a href="index.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
-				</td>
-				<td>
-					<a href="server.php?del=<?php echo $row['id']; ?>" class="del_btn">Delete</a>
-				</td>
-			</tr>
-		<?php } ?>
-	</table>
+		</div>
 
-	<form name="student-form" method="post" action="server.php" >
-		<input type="hidden" name="id" value="<?php echo $id; ?>">
-		<div class="input-group">
-			<label>Name</label>
-			<input type="text" name="name" value="<?php echo $name; ?>">
-		</div>
-		<div class="input-group">
-			<label>Roll No.</label>
-			<input type="text" name="roll_no" value="<?php $roll_no==0 ? printf("") : printf($roll_no); ?>">
-		</div>
-		<div class="input-group">
-			<label>Faculty</label>
-			<input type="text" name="faculty" value="<?php echo $faculty; ?>">
-		</div>
-		<div class="input-group">
-			<label>Batch</label>
-			<input type="text" name="batch" value="<?php $batch==0 ? printf("") : printf($batch); ?>">
-		</div>
-		<div class="input-group">
-			<label>Date of Birth</label>
-			<input type="date" name="dob" value="<?php echo $dob; ?>">
-		</div>
-		<div class="input-group">
-			<label>Address</label>
-			<input type="text" name="address" value="<?php echo $address; ?>">
-		</div>
-		<div class="input-group">
-			<label>Email</label>
-			<input type="text" name="email" value="<?php echo $email; ?>">
-		</div>
-		<div class="input-group">
-			<label>Phone</label>
-			<input type="text" name="phone" value="<?php $phone==0 ? printf("") : printf($phone); ?>">
-		</div>
-		<div class="input-group">
-			<!-- <button class="btn" type="submit" name="save" >Save</button> -->
-			<?php if ($update == true): ?>
-				<button class="btn" onclick="return validateForm()" type="submit" name="update" style="background: #556B2F;" >Update</button>
-			<?php else: ?>
-				<button class="btn" onclick="return validateForm()" type="submit" name="save" >Save</button>
-			<?php endif ?>
-		</div>
-	</form>
-</body>
+	</body>
+
 </html>
