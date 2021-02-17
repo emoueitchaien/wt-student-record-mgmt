@@ -20,9 +20,10 @@
 		$pass = mysqli_real_escape_string($db, $_POST['password1']);
 
 		if($user == "" || $pass == "") {
-			echo "Either username or password field is empty.";
-			echo "<br/>";
-			echo "<a href='login.php'>Go back</a>";
+			// echo "Either username or password field is empty.";
+			// echo "<br/>";
+			// echo "<a href='login.php'>Go back</a>";
+			echo '<script>alert("Either username or password field is empty.")</script>';
 		} 
 		else {
 			$result = mysqli_query($db, "SELECT * FROM register WHERE username = '$user' AND password1 = '$pass' ")
@@ -34,9 +35,10 @@
 				$_SESSION["id"] = $row['id'];
 				$_SESSION["username"] = $row['username'];
 			} else {
-				echo "Invalid username or password.";
-				echo "<br/>";
-				echo "<a href='login.php'>Go back</a>";
+				// echo "Invalid username or password.";
+				// echo "<br/>";
+				// echo "<a href='login.php'>Go back</a>";
+				echo '<script>alert("Invalid username or password.")</script>';
 			}
 
 			if(isset($_SESSION["id"])) {
