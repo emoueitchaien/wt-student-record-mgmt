@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2021 at 07:02 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Jul 01, 2021 at 08:25 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,17 +31,9 @@ CREATE TABLE `register` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `email` text NOT NULL,
-  `username` varchar(8) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `password1` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `register`
---
-
-INSERT INTO `register` (`id`, `name`, `email`, `username`, `password1`) VALUES
-(21, 'Ram Thapa', 'ramthapa@gmail.com', 'ram', 'ram123'),
-(22, 'Hari Pokharel', 'pokharelhari@gmail.com', 'hari', 'hari123');
 
 -- --------------------------------------------------------
 
@@ -93,13 +85,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
